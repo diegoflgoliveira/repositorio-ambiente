@@ -4,20 +4,26 @@ on:
 jobs:
     deploy-fake:
         runs-on: ubuntu-latest
-        environment: homologacao
+        environment:
+            name: homologacao
+            url: "http://homologacao.ambiente.com.br"
         steps:
             - name: Fake de deploy em ambiente
               run: echo "Deploy no ambiente de ${{ vars.AMBIENTE_DEPLOY }}"
     teste-fake:
         runs-on: ubuntu-latest
-        environment: homologacao
+        environment:
+            name: teste
+            url: "http://teste.ambiente.com.br"
         needs: [deploy-fake]
         steps:
             - name: Fake de deploy em ambiente
               run: echo "Deploy no ambiente de ${{ vars.AMBIENTE_DEPLOY }}"
     deploy-producao:
         runs-on: ubuntu-latest
-        environment: producao
+        environment:
+            name: producao
+            url: "http://producao.ambiente.com.br"
         needs: [teste-fake]
         steps:
             - name: Fake de deploy em ambiente
